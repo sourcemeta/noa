@@ -72,6 +72,35 @@ cmake --build <dir> [<options>] --target clang_format
 cmake --build <dir> [<options>] --target clang_format_test
 ```
 
+#### `noa_target_clang_tidy`
+
+Setup [ClangTidy](https://clang.llvm.org/extra/clang-tidy/index.html) using an
+opinionated built-in [configuration
+file](https://github.com/sourcemeta/noa/blob/main/cmake/noa/targets/clang-tidy.config).
+
+```cmake
+noa_target_clang_tidy(SOURCES [globs...] [REQUIRED])
+```
+
+If the `REQUIRED` option is set and ClangTidy is not found, configuration will
+abort.
+
+After running this function, you will have a new targets at your disposal:
+
+- `clang_tidy`: Run the analyzer on the files declared in the `SOURCES` option
+
+For example:
+
+```cmake
+noa_target_clang_tidy(SOURCES src/*.h src/*.cc REQUIRED)
+```
+
+To run the targets:
+
+```sh
+cmake --build <dir> [<options>] --target clang_tidy
+```
+
 ### Commands
 
 #### `noa_command_copy_file`

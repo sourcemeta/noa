@@ -89,6 +89,12 @@ It is highly recommended to always copy files into the binary directory.
 
 ### Variables
 
+#### Programming language
+
+- `NOA_LANGUAGES`: A list of the programming languages declared in the last
+  [`project`](https://cmake.org/cmake/help/latest/command/project.html)
+  invocation
+
 #### Compiler detection
 
 - `NOA_COMPILER_LLVM`: Set to `ON` if using the Clang or AppleClang compilers

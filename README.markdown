@@ -87,6 +87,22 @@ add_custom_target(do_copy DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/output.txt")
 
 It is highly recommended to always copy files into the binary directory.
 
+### Variables
+
+#### Compiler detection
+
+- `NOA_COMPILER_LLVM`: Set to `ON` if using the Clang or AppleClang compilers
+- `NOA_COMPILER_GCC`: Set to `ON` if using the GNU GCC compiler
+- `NOA_COMPILER_MSVC`: Set to `ON` if using the MSVC compiler
+
+For example:
+
+```cmake
+if(NOA_COMPILER_LLVM)
+  add_compile_options([...])
+endif()
+```
+
 ### Shims
 
 CMake functionality shimmed to work on older versions:

@@ -64,6 +64,29 @@ cmake --build <dir> [<options>] --target clang_format
 cmake --build <dir> [<options>] --target clang_format_test
 ```
 
+### Commands
+
+#### `noa_command_copy_file`
+
+The built-in [`file`](https://cmake.org/cmake/help/latest/command/file.html)
+command can be used to copy a file during the configure phase. Instead, this
+command copies a file at the build step to deal with generated files or as an
+optimization.
+
+```cmake
+noa_command_copy_file(FROM [input] TO [output])
+```
+
+For example, you can declare a file to be copied at built-time, and then
+reference such output in a target for the copying to actually take place:
+
+```cmake
+noa_command_copy_file(FROM input.txt TO "${CMAKE_CURRENT_BINARY_DIR}/output.txt")
+add_custom_target(do_copy DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/output.txt")
+```
+
+It is highly recommended to always copy files into the binary directory.
+
 ### Shims
 
 CMake functionality shimmed to work on older versions:

@@ -28,6 +28,14 @@ using `vendorpull`), add the following statements *after* the first call to
 include(vendor/noa/cmake/noa.cmake)
 ```
 
+### Defaults
+
+Noa will automatically set sane defaults for your project. You can check the
+list of applied defaults
+[here](https://github.com/sourcemeta/noa/blob/main/cmake/noa/defaults.cmake).
+**Note that these are only defaults. You can always override them after
+including Noa.**
+
 ### Functions
 
 #### `noa_target_clang_format`

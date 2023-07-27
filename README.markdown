@@ -30,14 +30,14 @@ include(vendor/noa/cmake/noa.cmake)
 
 ### Functions
 
-#### `noa_targets_clang_format`
+#### `noa_target_clang_format`
 
 Setup [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html) using an
 opinionated configuration file based on the [LLVM coding
 standards](https://llvm.org/docs/CodingStandards.html).
 
 ```cmake
-noa_targets_clang_format(SOURCES [globs...] [REQUIRED])
+noa_target_clang_format(SOURCES [globs...] [REQUIRED])
 ```
 
 If the `REQUIRED` option is set and ClangFormat is not found, configuration
@@ -54,7 +54,7 @@ After running this function, you will have two targets at your disposal:
 For example:
 
 ```cmake
-noa_targets_clang_format(SOURCES src/*.h src/*.cc REQUIRED)
+noa_target_clang_format(SOURCES src/*.h src/*.cc REQUIRED)
 ```
 
 To run the targets:

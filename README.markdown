@@ -4,6 +4,12 @@ Noa
 A set of re-usable and opinionated utilities for
 [Sourcemeta](https://www.sourcemeta.com) projects.
 
+Installation
+------------
+
+We recommend using [`vendorpull`](https://github.com/sourcemeta/vendorpull) to
+include Noa in your `vendor` directory.
+
 CMake
 -----
 

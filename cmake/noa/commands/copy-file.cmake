@@ -1,5 +1,4 @@
-
-macro(noa_command_copy_file source destination)
+function(noa_command_copy_file)
   cmake_parse_arguments(NOA_COMMAND_COPY_FILE "" "FROM;TO" "" ${ARGN})
 
   if(NOT NOA_COMMAND_COPY_FILE_FROM)
@@ -15,4 +14,4 @@ macro(noa_command_copy_file source destination)
     MAIN_DEPENDENCY "${NOA_COMMAND_COPY_FILE_FROM}"
     DEPENDS "${NOA_COMMAND_COPY_FILE_FROM}"
     COMMENT "Copying ${NOA_COMMAND_COPY_FILE_FROM} ot ${NOA_COMMAND_COPY_FILE_TO}")
-endmacro()
+endfunction()

@@ -20,6 +20,14 @@ recommend always following the latest commit in the `main` branch.
 CMake
 -----
 
+To make use of Noa in a CMake project (after installing it into your project
+using `vendorpull`), add the following statements *after* the first call to
+[`project`](https://cmake.org/cmake/help/latest/command/project.html):
+
+```cmake
+include(vendor/noa/cmake/noa.cmake)
+```
+
 ### Functions
 
 #### `noa_targets_clang_format`

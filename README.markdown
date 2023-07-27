@@ -10,6 +10,13 @@ Installation
 We recommend using [`vendorpull`](https://github.com/sourcemeta/vendorpull) to
 include Noa in your `vendor` directory.
 
+### Live at head
+
+Like projects such as [`GoogleTest`](https://github.com/google/googletest), Noa
+follows the [Abseil Live at
+Head](https://abseil.io/about/philosophy#upgrade-support) philosophy. We
+recommend always following the latest commit in the `main` branch.
+
 CMake
 -----
 

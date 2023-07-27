@@ -1,7 +1,8 @@
 Noa
 ===
 
-A set of re-usable utilities for Sourcemeta projects.
+A set of re-usable and opinionated utilities for
+[Sourcemeta](https://www.sourcemeta.com) projects.
 
 CMake
 -----

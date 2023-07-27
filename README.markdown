@@ -92,4 +92,3 @@ It is highly recommended to always copy files into the binary directory.
 CMake functionality shimmed to work on older versions:
 
 - [`PROJECT_IS_TOP_LEVEL`](https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html)
-

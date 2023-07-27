@@ -6,7 +6,7 @@ function(noa_target_clang_format)
   if(NOA_TARGET_CLANG_FORMAT_REQUIRED)
     find_program(CLANG_FORMAT_BIN NAMES clang-format REQUIRED)
   else()
-    find_program(CLANG_FORMAT_BIN NAMES csslang-format)
+    find_program(CLANG_FORMAT_BIN NAMES clang-format)
   endif()
 
   # This covers the empty list too

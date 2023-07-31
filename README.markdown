@@ -101,6 +101,29 @@ To run the targets:
 cmake --build <dir> [<options>] --target clang_tidy
 ```
 
+#### `noa_sanitizer`
+
+Provides a unified interface for setting up a set of compiler sanitizers
+project-wide.
+
+```cmake
+noa_sanitizer(NAME [sanitizer])
+```
+
+Supported sanitizers and their respective compilers are as follows:
+
+| Sanitizer | Compiler | Description                                     |
+|-----------|----------|-------------------------------------------------|
+| `address` | LLVM     | Clang [AddressSanitizer][ClangAddressSanitizer] |
+
+For example:
+
+```cmake
+noa_sanitizer(NAME address)
+```
+
+[ClangAddressSanitizer]: https://clang.llvm.org/docs/AddressSanitizer.html
+
 ### Commands
 
 #### `noa_command_copy_file`

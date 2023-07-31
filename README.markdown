@@ -115,6 +115,7 @@ Supported sanitizers and their respective compilers are as follows:
 | Sanitizer | Compiler | Description                                     |
 |-----------|----------|-------------------------------------------------|
 | `address` | LLVM     | Clang [AddressSanitizer][ClangAddressSanitizer] |
+| `memory`  | LLVM     | Clang [MemorySanitizer][ClangMemorySanitizer] |
 
 For example:
 
@@ -123,6 +124,7 @@ noa_sanitizer(NAME address)
 ```
 
 [ClangAddressSanitizer]: https://clang.llvm.org/docs/AddressSanitizer.html
+[ClangMemorySanitizer]: https://clang.llvm.org/docs/MemorySanitizer.html
 
 ### Commands
 

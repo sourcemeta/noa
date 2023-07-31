@@ -1,3 +1,8 @@
+# Standards (sane modern defaults)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_OBJCXX_STANDARD "${CMAKE_CXX_STANDARD}")
+
 # Hide symbols from shared libraries by default
 # In certain compilers, like GCC and Clang,
 # symbols are visible by default.
@@ -10,6 +15,10 @@ endif()
 if("CXX" IN_LIST NOA_LANGUAGES)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
   set(CMAKE_CXX_EXTENSIONS OFF)
+  set(CMAKE_C_STANDARD_REQUIRED ON)
+  set(CMAKE_C_EXTENSIONS OFF)
+  set(CMAKE_OBJCXX_STANDARD_REQUIRED ON)
+  set(CMAKE_OBJCXX_EXTENSIONS OFF)
 endif()
 
 # Export compile commands by default.

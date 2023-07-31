@@ -25,6 +25,16 @@ function(noa_sanitizer)
     # Get nicer stack traces with the Memory sanitizer
     add_compile_options(-fno-omit-frame-pointer -fno-optimize-sibling-calls)
     add_compile_options(-O1)
+  elseif(NOA_COMPILER_LLVM AND "${NOA_SANITIZER_TYPE}" STREQUAL "undefined")
+    # See https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
+    message(STATUS "Enabling sanitizer: Clang UndefinedBehaviorSanitizer")
+    add_compile_options(-fsanitize=undefined,nullability,integer,implicit-conversion,local-bounds)
+    add_link_options(-fsanitize=undefined,nullability,integer,implicit-conversion,local-bounds)
+    # Exit after an error, otherwise this sanitizer only prints warnings
+    add_compile_options(-fno-sanitize-recover=all)
+    # Execute a trap after an error, handy for getting you into
+    # the right place when running with a debugger.
+    add_compile_options(-fsanitize-trap=all)
   else()
     message(FATAL_ERROR "Unrecognized compiler and/or sanitizer combination")
   endif()

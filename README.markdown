@@ -112,10 +112,11 @@ noa_sanitizer(NAME [sanitizer])
 
 Supported sanitizers and their respective compilers are as follows:
 
-| Sanitizer | Compiler | Description                                     |
-|-----------|----------|-------------------------------------------------|
-| `address` | LLVM     | Clang [AddressSanitizer][ClangAddressSanitizer] |
-| `memory`  | LLVM     | Clang [MemorySanitizer][ClangMemorySanitizer] |
+| Sanitizer   | Compiler | Description                                                    |
+|-------------|----------|----------------------------------------------------------------|
+| `address`   | LLVM     | Clang [AddressSanitizer][ClangAddressSanitizer]                |
+| `memory`    | LLVM     | Clang [MemorySanitizer][ClangMemorySanitizer]                  |
+| `undefined` | LLVM     | Clang [UndefinedBehaviorSanitizer][UndefinedBehaviorSanitizer] |
 
 For example:
 
@@ -125,6 +126,7 @@ noa_sanitizer(NAME address)
 
 [ClangAddressSanitizer]: https://clang.llvm.org/docs/AddressSanitizer.html
 [ClangMemorySanitizer]: https://clang.llvm.org/docs/MemorySanitizer.html
+[UndefinedBehaviorSanitizer]: https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
 
 ### Commands
 

@@ -32,9 +32,6 @@ function(noa_sanitizer)
     add_link_options(-fsanitize=undefined,nullability,integer,implicit-conversion,local-bounds)
     # Exit after an error, otherwise this sanitizer only prints warnings
     add_compile_options(-fno-sanitize-recover=all)
-    # Execute a trap after an error, handy for getting you into
-    # the right place when running with a debugger.
-    add_compile_options(-fsanitize-trap=all)
   else()
     message(FATAL_ERROR "Unrecognized compiler and/or sanitizer combination")
   endif()

@@ -146,6 +146,31 @@ if(NOA_COMPILER_LLVM)
 endif()
 ```
 
+### Options
+
+#### `noa_option_enum`
+
+A shortcut for declaring CMake options that correspond to string enumerations.
+
+```cmake
+noa_option_enum(NAME [name] DEFAULT [value] DESCRIPTION [description] CHOICES [choices...])
+```
+
+This function will validate that user provided values (and your own default
+value) matches the provided choices. It will also make sure to provide a nice
+selection interface in
+[`cmake-gui(1)`](https://cmake.org/cmake/help/latest/manual/cmake-gui.1.html).
+
+For example:
+
+```cmake
+noa_option_enum(
+  NAME MY_OPTION
+  DEFAULT "foo"
+  DESCRIPTION "A test enum"
+  CHOICES foo bar baz)
+```
+
 ### Shims
 
 CMake functionality shimmed to work on older versions:

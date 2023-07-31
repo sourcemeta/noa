@@ -55,3 +55,8 @@ set(CMAKE_GTEST_DISCOVER_TESTS_DISCOVERY_MODE PRE_TEST)
 # Always use folders in IDE
 # See https://cmake.org/cmake/help/latest/prop_gbl/USE_FOLDERS.html
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+# Ensure CMAKE_BUILD_TYPE is always defined
+if(NOT CMAKE_BUILD_TYPE)
+  message(FATAL_ERROR "Omitting CMAKE_BUILD_TYPE might lead to unexpected generator behavior")
+endif()

@@ -118,15 +118,20 @@ Supported sanitizers and their respective compilers are as follows:
 | `memory`    | LLVM     | Clang [MemorySanitizer][ClangMemorySanitizer]                  |
 | `undefined` | LLVM     | Clang [UndefinedBehaviorSanitizer][UndefinedBehaviorSanitizer] |
 
+[ClangAddressSanitizer]: https://clang.llvm.org/docs/AddressSanitizer.html
+[ClangMemorySanitizer]: https://clang.llvm.org/docs/MemorySanitizer.html
+[UndefinedBehaviorSanitizer]: https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
+
 For example:
 
 ```cmake
 noa_sanitizer(NAME address)
 ```
 
-[ClangAddressSanitizer]: https://clang.llvm.org/docs/AddressSanitizer.html
-[ClangMemorySanitizer]: https://clang.llvm.org/docs/MemorySanitizer.html
-[UndefinedBehaviorSanitizer]: https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
+#### Tips & Tricks
+
+- To better debug issues raised by the `undefined` sanitizer on LLVM, run with
+  LLDB along with the `-fsanitize-trap=all` compiler option
 
 ### Commands
 

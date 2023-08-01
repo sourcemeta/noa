@@ -101,6 +101,33 @@ To run the targets:
 cmake --build <dir> [<options>] --target clang_tidy
 ```
 
+#### `noa_target_shellcheck`
+
+Setup [ShellCheck](https://www.shellcheck.net).
+
+```cmake
+noa_target_shellcheck(SOURCES [globs...] [REQUIRED])
+```
+
+If the `REQUIRED` option is set and ShellCheck is not found, configuration will
+abort.
+
+After running this function, you will have a new targets at your disposal:
+
+- `shellcheck`: Run the linter on the files declared in the `SOURCES` option
+
+For example:
+
+```cmake
+noa_target_shellcheck(SOURCES scripts/*.sh REQUIRED)
+```
+
+To run the targets:
+
+```sh
+cmake --build <dir> [<options>] --target shellcheck
+```
+
 #### `noa_sanitizer`
 
 Provides a unified interface for setting up a set of compiler sanitizers

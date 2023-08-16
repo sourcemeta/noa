@@ -13,7 +13,7 @@ function(noa_sanitizer)
 
   if(NOA_COMPILER_LLVM AND "${NOA_SANITIZER_TYPE}" STREQUAL "address")
     # See https://clang.llvm.org/docs/AddressSanitizer.html
-    message(STATUS "Enabling sanitizer: Clang AddressSanitizer")
+    message(STATUS "Enabling sanitizer: Clang AddressSanitizer on ${NOA_SANITIZER_TARGET}")
     target_compile_options("${NOA_SANITIZER_TARGET}" PRIVATE
       -fsanitize=address -fsanitize-address-use-after-scope
       # Get nicer stack traces with the Address sanitizer
@@ -25,7 +25,7 @@ function(noa_sanitizer)
     endif()
 
     # See https://clang.llvm.org/docs/MemorySanitizer.html
-    message(STATUS "Enabling sanitizer: Clang MemorySanitizer")
+    message(STATUS "Enabling sanitizer: Clang MemorySanitizer on ${NOA_SANITIZER_TARGET}")
     target_compile_options("${NOA_SANITIZER_TARGET}" PRIVATE
       -fsanitize=memory -fno-sanitize-memory-use-after-dtor
       # Get nicer stack traces with the Memory sanitizer

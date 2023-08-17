@@ -130,11 +130,11 @@ cmake --build <dir> [<options>] --target shellcheck
 
 #### `noa_sanitizer`
 
-Provides a unified interface for setting up a set of compiler sanitizers on
-specific targets.
+Provides a unified interface for setting up a set of compiler sanitizers
+project-wide.
 
 ```cmake
-noa_sanitizer(NAME [sanitizer] TARGET [target])
+noa_sanitizer(NAME [sanitizer])
 ```
 
 Supported sanitizers and their respective compilers are as follows:
@@ -152,7 +152,7 @@ Supported sanitizers and their respective compilers are as follows:
 For example:
 
 ```cmake
-noa_sanitizer(NAME address TARGET my_executable)
+noa_sanitizer(NAME address)
 ```
 
 #### Tips & Tricks

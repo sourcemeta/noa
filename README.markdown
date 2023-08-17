@@ -158,7 +158,8 @@ noa_sanitizer(NAME address TARGET my_executable)
 #### Tips & Tricks
 
 - To better debug issues raised by the `undefined` sanitizer on LLVM, run with
-  LLDB along with the `-fsanitize-trap=all` compiler option
+  LLDB along with the `-fsanitize-trap=all` compiler option and set the
+  `UBSAN_OPTIONS=print_stacktrace=1` environment variable
 
 ### Commands
 

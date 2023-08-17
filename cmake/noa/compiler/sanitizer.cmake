@@ -33,7 +33,7 @@ function(noa_sanitizer)
     target_link_options("${NOA_SANITIZER_TARGET}" PUBLIC -fsanitize=memory)
   elseif(NOA_COMPILER_LLVM AND "${NOA_SANITIZER_TYPE}" STREQUAL "undefined")
     # See https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
-    message(STATUS "Enabling sanitizer: Clang UndefinedBehaviorSanitizer")
+    message(STATUS "Enabling sanitizer: Clang UndefinedBehaviorSanitizer on ${NOA_SANITIZER_TARGET}")
     target_compile_options("${NOA_SANITIZER_TARGET}" PRIVATE
       -fsanitize=undefined,nullability,integer,implicit-conversion,local-bounds)
     target_link_options("${NOA_SANITIZER_TARGET}" PUBLIC

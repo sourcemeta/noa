@@ -128,6 +128,37 @@ To run the targets:
 cmake --build <dir> [<options>] --target shellcheck
 ```
 
+#### `noa_target_doxygen`
+
+Setup [Doxygen](https://www.doxygen.nl) with a templated configuration file.
+
+```cmake
+noa_target_doxygen(CONFIG [config] OUTPUT [output])
+```
+
+On your configuration file, make sure to set `OUTPUT_DIRECTORY` as follows:
+
+```
+OUTPUT_DIRECTORY       = @NOA_TARGET_DOXYGEN_OUTPUT@
+```
+
+After running this function, you will have a new target at your disposal:
+
+- `doxygen`: Run Doxygen and store the output in the `OUTPUT` directory
+
+For example:
+
+```cmake
+noa_target_doxygen(CONFIG "${PROJECT_SOURCE_DIR}/Doxyfile.in"
+  OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/docs")
+```
+
+To run the targets:
+
+```sh
+cmake --build <dir> [<options>] --target doxygen
+```
+
 #### `noa_sanitizer`
 
 Provides a unified interface for setting up a set of compiler sanitizers

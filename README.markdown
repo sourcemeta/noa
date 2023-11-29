@@ -38,6 +38,45 @@ including Noa.**
 
 ### Functions
 
+#### `noa_library`
+
+Instantiate a C++ library with an opinionated structure and configuration.
+
+```cmake
+noa_library(
+  NAMESPACE [namespace]
+  PROJECT [project]
+  NAME [name]
+  FOLDER [folder]
+  PRIVATE_HEADERS [headers...]
+  SOURCES [globs...])
+```
+
+The files in `PRIVATE_HEADERS` are resolved relatively to
+`include/<namespace>/<name>/<name>_`.
+
+The expected structure is as follows:
+
+```
+include/
+  <namespace>/
+    <name>/
+      <name>.h
+      <name>_<private_header>.h
+<sources...>.cc
+<sources...>.h
+```
+
+Calling this function will result in the following:
+
+- A target called `<namespace>_<project>_<name>`
+- An alias target called `<namespace>::<project>::<name>`
+- An export file on the include path called `<name>_export.h`
+- The version of the library corresponds to the project version
+- A `<namespace>_<project>_<name>` installation component
+- A `<namespace>_<project>_<name>_dev` installation component
+- An export file at `LIBDIR/cmake/<project>`
+
 #### `noa_target_clang_format`
 
 Setup [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html) using an

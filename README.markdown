@@ -73,6 +73,17 @@ Calling this function will result in the following:
 - An alias target called `<namespace>::<project>::<name>`
 - An export file on the include path called `<name>_export.h`
 - The version of the library corresponds to the project version
+
+#### `noa_library_install`
+
+Declare installation of opinionated Noa libraries created with `noa_library`.
+
+```cmake
+noa_library(NAMESPACE [namespace] PROJECT [project] NAME [name])
+```
+
+Calling this function will result in the following:
+
 - A `<namespace>_<project>_<name>` installation component
 - A `<namespace>_<project>_<name>_dev` installation component
 - An export file at `LIBDIR/cmake/<project>`

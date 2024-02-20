@@ -102,7 +102,7 @@ In both cases:
 Declare installation of opinionated Noa libraries created with `noa_library`.
 
 ```cmake
-noa_library([NAMESPACE [namespace]] PROJECT [project] NAME [name])
+noa_library_install([NAMESPACE [namespace]] PROJECT [project] NAME [name])
 ```
 
 If `NAMESPACE` is declared, calling this function will result in the following:

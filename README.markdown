@@ -44,7 +44,7 @@ Instantiate a C++ library with an opinionated structure and configuration.
 
 ```cmake
 noa_library(
-  NAMESPACE [namespace]
+  [NAMESPACE [namespace]]
   PROJECT [project]
   NAME [name]
   FOLDER [folder]
@@ -52,10 +52,11 @@ noa_library(
   [SOURCES [globs...]])
 ```
 
-The files in `PRIVATE_HEADERS` are resolved relatively to
-`include/<namespace>/<name>/<name>_`.
+If `NAMESPACE` is declared, the files in `PRIVATE_HEADERS` are resolved
+relatively to `include/<namespace>/<name>/<name>_`. Otherwise, they are
+resolved relatively to `include/<name>/<name>_`.
 
-The expected structure is as follows:
+If `NAMESPACE` is declared, the expected structure is as follows:
 
 ```
 include/
@@ -67,10 +68,30 @@ include/
 <sources...>.h
 ```
 
-Calling this function will result in the following:
+If `NAMESPACE` is not declared, the expected structure is as follows:
+
+```
+include/
+  <name>/
+    <name>.h
+    <name>_<private_header>.h
+<sources...>.cc
+<sources...>.h
+```
+
+If `NAMESPACE` is declared, calling this function will result in the following:
 
 - A target called `<namespace>_<project>_<name>`
 - An alias target called `<namespace>::<project>::<name>`
+
+If `NAMESPACE` is not declared, calling this function will result in the
+following:
+
+- A target called `<project>_<name>`
+- An alias target called `<project>::<name>`
+
+In both cases:
+
 - An export file on the include path called `<name>_export.h`, if the library
   is not header-only
 - The version of the library corresponds to the project version, if the library
@@ -81,13 +102,22 @@ Calling this function will result in the following:
 Declare installation of opinionated Noa libraries created with `noa_library`.
 
 ```cmake
-noa_library(NAMESPACE [namespace] PROJECT [project] NAME [name])
+noa_library([NAMESPACE [namespace]] PROJECT [project] NAME [name])
 ```
 
-Calling this function will result in the following:
+If `NAMESPACE` is declared, calling this function will result in the following:
 
 - A `<namespace>_<project>_<name>` installation component
 - A `<namespace>_<project>_<name>_dev` installation component
+
+If `NAMESPACE` is not declared, calling this function will result in the
+following:
+
+- A `<project>_<name>` installation component
+- A `<project>_<name>_dev` installation component
+
+In both cases:
+
 - An export file at `LIBDIR/cmake/<project>`
 
 #### `noa_target_clang_format`

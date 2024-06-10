@@ -5,6 +5,14 @@ inputs:
   step:
     description: Step to run
     required: true
+  mode:
+    description: Static vs shared
+    required: false
+    default: static
+  options:
+    description: Additional CMake options
+    required: false
+    default: ''
 
 runs:
   using: composite
@@ -33,9 +41,39 @@ runs:
       run: choco install shellcheck
 
     # CMake
-    - run: cmake --version
-      if: runner.os == 'windows'
+    - if: runner.os == 'windows' && inputs.step == 'configure'
+      run: cmake --version
       shell: pwsh
-    - run: cmake --version
-      if: runner.os != 'windows'
+    - if: runner.os != 'windows' && inputs.step == 'configure'
+      run: cmake --version
       shell: bash
+
+    # Configure
+    - if: runner.os == 'windows' && inputs.type == 'static'
+      run: >
+        cmake -S . -B ./build
+        -DCMAKE_BUILD_TYPE:STRING=Release
+        -DBUILD_SHARED_LIBS:BOOL=OFF
+        -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
+        ${{ inputs.options }}
+    - if: runner.os == 'windows' && inputs.type == 'shared'
+      run: >
+        cmake -S . -B ./build
+        -DCMAKE_BUILD_TYPE:STRING=Release
+        -DBUILD_SHARED_LIBS:BOOL=ON
+        -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
+        ${{ inputs.options }}
+    - if: runner.os != 'windows' && inputs.type == 'static'
+      run: >
+        cmake -S . -B ./build
+        -DCMAKE_BUILD_TYPE:STRING=Release
+        -DBUILD_SHARED_LIBS:BOOL=OFF
+        -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
+        ${{ inputs.options }}
+    - if: runner.os != 'windows' && inputs.type == 'shared'
+      run: >
+        cmake -S . -B ./build
+        -DCMAKE_BUILD_TYPE:STRING=Release
+        -DBUILD_SHARED_LIBS:BOOL=ON
+        -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
+        ${{ inputs.options }}

@@ -17,8 +17,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v4
-
     # ClangFormat
     - if: runner.os == 'windows' && inputs.step == 'dependencies'
       shell: pwsh
@@ -49,7 +47,7 @@ runs:
       shell: bash
 
     # Configure
-    - if: runner.os == 'windows' && inputs.type == 'static'
+    - if: runner.os == 'windows' && inputs.step == 'configure' && inputs.type == 'static'
       shell: pwsh
       run: >
         cmake -S . -B ./build
@@ -57,7 +55,7 @@ runs:
         -DBUILD_SHARED_LIBS:BOOL=OFF
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
-    - if: runner.os == 'windows' && inputs.type == 'shared'
+    - if: runner.os == 'windows' && inputs.step == 'configure' && inputs.type == 'shared'
       shell: pwsh
       run: >
         cmake -S . -B ./build
@@ -65,7 +63,7 @@ runs:
         -DBUILD_SHARED_LIBS:BOOL=ON
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
-    - if: runner.os != 'windows' && inputs.type == 'static'
+    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.type == 'static'
       shell: bash
       run: >
         cmake -S . -B ./build
@@ -73,7 +71,7 @@ runs:
         -DBUILD_SHARED_LIBS:BOOL=OFF
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
-    - if: runner.os != 'windows' && inputs.type == 'shared'
+    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.type == 'shared'
       shell: bash
       run: >
         cmake -S . -B ./build

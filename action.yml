@@ -21,7 +21,7 @@ runs:
 
     # Brewfile
     - if: runner.os == 'macos' && inputs.step == 'dependencies'
-      run: if [ -f Brewfile ]; then brew bundle; fi
+      run: brew install cmake doxygen && if [ -f Brewfile ]; then brew bundle; fi
       shell: bash
       env:
         HOMEBREW_NO_ANALYTICS: 1

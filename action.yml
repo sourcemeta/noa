@@ -133,7 +133,7 @@ runs:
         CC: gcc
         CXX: g++
 
-    - if: runner.os == 'windows' && inputs.step == 'configure' && inputs.mode == 'static' && inputs.compiler == ''
+    - if: runner.os == 'windows' && inputs.step == 'configure' && inputs.mode == 'static' && inputs.compiler == 'auto'
       shell: pwsh
       run: >
         cmake -S . -B ./build
@@ -141,7 +141,7 @@ runs:
         -DBUILD_SHARED_LIBS:BOOL=OFF
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
-    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.mode == 'static' && inputs.compiler == ''
+    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.mode == 'static' && inputs.compiler == 'auto'
       shell: bash
       run: >
         cmake -S . -B ./build

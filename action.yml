@@ -13,6 +13,18 @@ inputs:
     description: Additional CMake options
     required: false
     default: ''
+  component:
+    description: CMake component
+    required: false
+    default: ''
+  clang_format:
+    description: Run ClangFormat
+    required: false
+    default: true
+  shellcheck:
+    description: Run ShellCheck
+    required: false
+    default: false
 
 runs:
   using: composite
@@ -96,6 +108,62 @@ runs:
     - if: runner.os != 'windows' && inputs.step == 'build'
       shell: bash
       run: cmake --build ./build --config Release --parallel 4
+
+    # TODO: Revert this when possible
+    - name: Copy in the correct VC runtime DLLs (workaround for actions/runner-images#10004)
+      if: runner.os == 'windows' && inputs.step == 'build'
+      shell: pwsh
+      run: |
+        Copy-Item (Join-Path `
+          ((Get-ChildItem -Directory `
+              -Path "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\14.*" |
+            Sort -Descending | Select-Object -First 1).FullName
+          ) 'x64\Microsoft.VC143.CRT\*.dll') "build\bin\Release"
+
+    #############################################
+    # Check
+    #############################################
+
+    # ClangFormat
+    - if: runner.os == 'windows' && inputs.step == 'check' && inputs.clang_format
+      shell: pwsh
+      run: cmake --build ./build --config Release --target clang_format_test
+    - if: runner.os != 'windows' && inputs.step == 'check' && inputs.clang_format
+      shell: bash
+      run: cmake --build ./build --config Release --target clang_format_test
+
+    # ShellCheck
+    - if: runner.os == 'windows' && inputs.step == 'check' && inputs.shellcheck
+      shell: pwsh
+      run: cmake --build ./build --config Release --target shellcheck
+    - if: runner.os != 'windows' && inputs.step == 'check' && inputs.shellcheck
+      shell: bash
+      run: cmake --build ./build --config Release --target shellcheck
+
+    #############################################
+    # Install
+    #############################################
+
+    - if: runner.os == 'windows' && inputs.step == 'install'
+      shell: pwsh
+      run: >
+        cmake --install ./build --prefix ./build/dist --config Release --verbose
+        --component sourcemeta_${{ inputs.component }}
+    - if: runner.os == 'windows' && inputs.step == 'install'
+      shell: pwsh
+      run: >
+        cmake --install ./build --prefix ./build/dist --config Release --verbose
+        --component sourcemeta_${{ inputs.component }}_dev
+    - if: runner.os != 'windows' && inputs.step == 'install'
+      shell: bash
+      run: >
+        cmake --install ./build --prefix ./build/dist --config Release --verbose
+        --component sourcemeta_${{ inputs.component }}
+    - if: runner.os != 'windows' && inputs.step == 'install'
+      shell: bash
+      run: >
+        cmake --install ./build --prefix ./build/dist --config Release --verbose
+        --component sourcemeta_${{ inputs.component }}_dev
 
     #############################################
     # Test

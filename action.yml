@@ -27,4 +27,10 @@ runs:
       shell: pwsh
       run: choco install shellcheck
 
-    - run: cmake --version
+    - run: cmake --version (Windows)
+      if: runner.os == 'windows'
+      shell: pwsh
+
+    - run: cmake --version (*nix)
+      if: runner.os != 'windows'
+      shell: bash

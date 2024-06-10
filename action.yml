@@ -9,6 +9,10 @@ inputs:
     description: Static vs shared
     required: false
     default: static
+  compiler:
+    description: The compiler identifier
+    required: false
+    default: ''
   options:
     description: Additional CMake options
     required: false
@@ -21,10 +25,6 @@ inputs:
     description: Run ClangFormat
     required: false
     default: true
-  shellcheck:
-    description: Run ShellCheck
-    required: false
-    default: false
 
 runs:
   using: composite
@@ -65,7 +65,7 @@ runs:
       run: cmake --version
       shell: bash
 
-    - if: runner.os == 'windows' && inputs.step == 'configure' && inputs.mode == 'static'
+    - if: runner.os == 'windows' && inputs.step == 'configure' && inputs.mode == 'static' && inputs.compiler == 'msvc'
       shell: pwsh
       run: >
         cmake -S . -B ./build
@@ -73,7 +73,7 @@ runs:
         -DBUILD_SHARED_LIBS:BOOL=OFF
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
-    - if: runner.os == 'windows' && inputs.step == 'configure' && inputs.mode == 'shared'
+    - if: runner.os == 'windows' && inputs.step == 'configure' && inputs.mode == 'shared' && inputs.compiler == 'msvc'
       shell: pwsh
       run: >
         cmake -S . -B ./build
@@ -81,7 +81,8 @@ runs:
         -DBUILD_SHARED_LIBS:BOOL=ON
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
-    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.mode == 'static'
+
+    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.mode == 'static' && inputs.compiler == 'llvm'
       shell: bash
       run: >
         cmake -S . -B ./build
@@ -89,7 +90,10 @@ runs:
         -DBUILD_SHARED_LIBS:BOOL=OFF
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
-    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.mode == 'shared'
+      env:
+        CC: clang
+        CXX: clang++
+    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.mode == 'shared' && inputs.compiler == 'llvm'
       shell: bash
       run: >
         cmake -S . -B ./build
@@ -97,6 +101,32 @@ runs:
         -DBUILD_SHARED_LIBS:BOOL=ON
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
+      env:
+        CC: clang
+        CXX: clang++
+
+    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.mode == 'static' && inputs.compiler == 'gcc'
+      shell: bash
+      run: >
+        cmake -S . -B ./build
+        -DCMAKE_BUILD_TYPE:STRING=Release
+        -DBUILD_SHARED_LIBS:BOOL=OFF
+        -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
+        ${{ inputs.options }}
+      env:
+        CC: gcc
+        CXX: g++
+    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.mode == 'shared' && inputs.compiler == 'gcc'
+      shell: bash
+      run: >
+        cmake -S . -B ./build
+        -DCMAKE_BUILD_TYPE:STRING=Release
+        -DBUILD_SHARED_LIBS:BOOL=ON
+        -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
+        ${{ inputs.options }}
+      env:
+        CC: gcc
+        CXX: g++
 
     #############################################
     # Build
@@ -125,20 +155,12 @@ runs:
     #############################################
 
     # ClangFormat
-    - if: runner.os == 'windows' && inputs.step == 'check' && inputs.clang_format == true
+    - if: runner.os == 'windows' && inputs.step == 'check' && inputs.clang_format
       shell: pwsh
       run: cmake --build ./build --config Release --target clang_format_test
-    - if: runner.os != 'windows' && inputs.step == 'check' && inputs.clang_format == true
+    - if: runner.os != 'windows' && inputs.step == 'check' && inputs.clang_format
       shell: bash
       run: cmake --build ./build --config Release --target clang_format_test
-
-    # ShellCheck
-    - if: runner.os == 'windows' && inputs.step == 'check' && inputs.shellcheck == true
-      shell: pwsh
-      run: cmake --build ./build --config Release --target shellcheck
-    - if: runner.os != 'windows' && inputs.step == 'check' && inputs.shellcheck == true
-      shell: bash
-      run: cmake --build ./build --config Release --target shellcheck
 
     #############################################
     # Install

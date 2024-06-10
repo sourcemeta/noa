@@ -241,6 +241,20 @@ To run the targets:
 cmake --build <dir> [<options>] --target doxygen
 ```
 
+#### `noa_add_default_options`
+
+Configure a target with an opinionated set of strict compiler options.
+
+```cmake
+noa_add_default_options([visibility] [target])
+```
+
+For example:
+
+```cmake
+noa_add_default_options(PUBLIC my_lib)
+````
+
 #### `noa_sanitizer`
 
 Provides a unified interface for setting up a set of compiler sanitizers

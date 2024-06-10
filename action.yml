@@ -212,7 +212,7 @@ runs:
     #############################################
     # Doxygen
     #############################################
-    
+
     - if: runner.os == 'windows' && inputs.step == 'doxygen'
       shell: pwsh
       run: cmake --build ./build --config Release --target doxygen
@@ -223,7 +223,7 @@ runs:
     #############################################
     # Website
     #############################################
-    
+
     - name: Setup Pages
       if: inputs.step == 'website'
       uses: actions/configure-pages@v1
@@ -236,3 +236,15 @@ runs:
       if: inputs.step == 'website'
       id: deployment
       uses: actions/deploy-pages@v2
+
+    #############################################
+    # Unikraft
+    #############################################
+
+    - uses: unikraft/kraftkit@stable
+      if: inputs.step == 'unikraft'
+      with:
+        workdir: .
+        run: |
+          kraft build --target development --jobs 4 --log-type=basic unikraft
+          kraft run --target development --disable-acceleration unikraft --memory 128Mi

@@ -35,8 +35,7 @@ function(noa_add_default_options visibility target)
       -Wfloat-conversion
       -Wimplicit-fallthrough
       -Wsign-compare
-      # TODO: Enable this flag for safety
-      -Wno-sign-conversion
+      -Wsign-conversion
       -Wunknown-pragmas
       -Wnon-virtual-dtor
       -Woverloaded-virtual

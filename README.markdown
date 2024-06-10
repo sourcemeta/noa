@@ -243,7 +243,8 @@ cmake --build <dir> [<options>] --target doxygen
 
 #### `noa_add_default_options`
 
-Configure a target with an opinionated set of strict compiler options.
+Configure a target with an opinionated set of strict compiler options. This
+function is used by default when making use of `noa_library`.
 
 ```cmake
 noa_add_default_options([visibility] [target])

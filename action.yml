@@ -4,33 +4,33 @@ description: Continuous Integration
 runs:
   using: composite
   steps:
-    - name: Install ClangFormat (Windows)
-      if: runner.os == 'windows'
+    - uses: actions/checkout@v4
+
+    # ClangFormat
+    - if: runner.os == 'windows'
       shell: pwsh
       run: pip install clang-format==18.1.5
-
-    - name: Install ClangFormat (*nix)
-      if: runner.os != 'windows'
+    - if: runner.os != 'windows'
       shell: bash
       run: pip install clang-format==18.1.5
 
-    - name: Install Brewfile dependencies (macOS)
-      if: runner.os == 'macos'
+    # Brewfile
+    - if: runner.os == 'macos'
       run: if [ -f Brewfile ]; then brew bundle; fi
       shell: bash
       env:
         HOMEBREW_NO_ANALYTICS: 1
         HOMEBREW_NO_AUTO_UPDATE: 1
 
-    - name: Install ShellCheck (Windows)
-      if: runner.os == 'windows'
+    # ShellCheck
+    - if: runner.os == 'windows'
       shell: pwsh
       run: choco install shellcheck
 
-    - run: cmake --version (Windows)
+    # CMake
+    - run: cmake --version
       if: runner.os == 'windows'
       shell: pwsh
-
-    - run: cmake --version (*nix)
+    - run: cmake --version
       if: runner.os != 'windows'
       shell: bash

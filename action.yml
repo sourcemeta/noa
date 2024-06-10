@@ -41,13 +41,18 @@ runs:
       shell: bash
       run: pip install clang-format==18.1.5
 
-    # Brewfile
+    # Dependencies & Brewfile
     - if: runner.os == 'macos' && inputs.step == 'dependencies'
       run: brew install cmake doxygen && if [ -f Brewfile ]; then brew bundle; fi
       shell: bash
       env:
         HOMEBREW_NO_ANALYTICS: 1
         HOMEBREW_NO_AUTO_UPDATE: 1
+
+    # Dependencies
+    - if: runner.os == 'linux' && inputs.step == 'dependencies'
+      shell: bash
+      run: sudo apt update && sudo apt install -y doxygen
 
     # ShellCheck
     - if: runner.os == 'windows' && inputs.step == 'dependencies'
@@ -203,3 +208,31 @@ runs:
       env:
         # See https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
         UBSAN_OPTIONS: print_stacktrace=1
+
+    #############################################
+    # Doxygen
+    #############################################
+    
+    - if: runner.os == 'windows' && inputs.step == 'doxygen'
+      shell: pwsh
+      run: cmake --build ./build --config Release --target doxygen
+    - if: runner.os != 'windows' && inputs.step == 'doxygen'
+      shell: bash
+      run: cmake --build ./build --config Release --target doxygen
+
+    #############################################
+    # Website
+    #############################################
+    
+    - name: Setup Pages
+      if: inputs.step == 'website'
+      uses: actions/configure-pages@v1
+    - name: Upload artifact
+      if: inputs.step == 'website'
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: ./build/website
+    - name: Deploy to GitHub Pages
+      if: inputs.step == 'website'
+      id: deployment
+      uses: actions/deploy-pages@v2

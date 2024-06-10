@@ -1,21 +1,26 @@
 name: Sourcemeta
 description: Continuous Integration
 
+inputs:
+  step:
+    description: Step to run
+    required: true
+
 runs:
   using: composite
   steps:
     - uses: actions/checkout@v4
 
     # ClangFormat
-    - if: runner.os == 'windows'
+    - if: runner.os == 'windows' && inputs.step == 'dependencies'
       shell: pwsh
       run: pip install clang-format==18.1.5
-    - if: runner.os != 'windows'
+    - if: runner.os != 'windows' && inputs.step == 'dependencies'
       shell: bash
       run: pip install clang-format==18.1.5
 
     # Brewfile
-    - if: runner.os == 'macos'
+    - if: runner.os == 'macos' && inputs.step == 'dependencies'
       run: if [ -f Brewfile ]; then brew bundle; fi
       shell: bash
       env:
@@ -23,7 +28,7 @@ runs:
         HOMEBREW_NO_AUTO_UPDATE: 1
 
     # ShellCheck
-    - if: runner.os == 'windows'
+    - if: runner.os == 'windows' && inputs.step == 'dependencies'
       shell: pwsh
       run: choco install shellcheck
 

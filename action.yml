@@ -50,6 +50,7 @@ runs:
 
     # Configure
     - if: runner.os == 'windows' && inputs.type == 'static'
+      shell: pwsh
       run: >
         cmake -S . -B ./build
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -57,6 +58,7 @@ runs:
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
     - if: runner.os == 'windows' && inputs.type == 'shared'
+      shell: pwsh
       run: >
         cmake -S . -B ./build
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -64,6 +66,7 @@ runs:
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
     - if: runner.os != 'windows' && inputs.type == 'static'
+      shell: bash
       run: >
         cmake -S . -B ./build
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -71,6 +74,7 @@ runs:
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
     - if: runner.os != 'windows' && inputs.type == 'shared'
+      shell: bash
       run: >
         cmake -S . -B ./build
         -DCMAKE_BUILD_TYPE:STRING=Release

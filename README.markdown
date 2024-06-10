@@ -17,12 +17,6 @@ follows the [Abseil Live at
 Head](https://abseil.io/about/philosophy#upgrade-support) philosophy. We
 recommend always following the latest commit in the `main` branch.
 
-### GitHub Actions
-
-We provide a re-usable GitHub Action that abstract away the most common steps
-for Sourcemeta project. Consult [`action.yml`](./action.yml) to see what's
-available.
-
 CMake
 -----
 

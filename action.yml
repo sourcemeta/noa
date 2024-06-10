@@ -17,6 +17,10 @@ inputs:
 runs:
   using: composite
   steps:
+    #############################################
+    # Dependencies
+    #############################################
+
     # ClangFormat
     - if: runner.os == 'windows' && inputs.step == 'dependencies'
       shell: pwsh
@@ -38,7 +42,10 @@ runs:
       shell: pwsh
       run: choco install shellcheck
 
-    # CMake
+    #############################################
+    # Configure
+    #############################################
+
     - if: runner.os == 'windows' && inputs.step == 'configure'
       run: cmake --version
       shell: pwsh
@@ -46,7 +53,6 @@ runs:
       run: cmake --version
       shell: bash
 
-    # Configure
     - if: runner.os == 'windows' && inputs.step == 'configure' && inputs.mode == 'static'
       shell: pwsh
       run: >
@@ -79,3 +85,31 @@ runs:
         -DBUILD_SHARED_LIBS:BOOL=ON
         -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
         ${{ inputs.options }}
+
+    #############################################
+    # Build
+    #############################################
+
+    - if: runner.os == 'windows' && inputs.step == 'build'
+      shell: pwsh
+      run: cmake --build ./build --config Release --parallel 4
+    - if: runner.os != 'windows' && inputs.step == 'build'
+      shell: bash
+      run: cmake --build ./build --config Release --parallel 4
+
+    #############################################
+    # Test
+    #############################################
+
+    # Not every CTest version supports the --test-dir option. If such option
+    # is not recognized, `ctest` will successfully exit finding no tests.
+    # Better to be sure and `cd` all the time here.
+    - if: runner.os == 'windows' && inputs.step == 'test'
+      shell: pwsh
+      run: cd ./build && ctest --build-config Release --output-on-failure --parallel
+    - if: runner.os != 'windows' && inputs.step == 'test'
+      shell: bash
+      run: cd ./build && ctest --build-config Release --output-on-failure --parallel
+      env:
+        # See https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
+        UBSAN_OPTIONS: print_stacktrace=1

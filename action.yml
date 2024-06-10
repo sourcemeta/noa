@@ -125,18 +125,18 @@ runs:
     #############################################
 
     # ClangFormat
-    - if: runner.os == 'windows' && inputs.step == 'check' && inputs.clang_format
+    - if: runner.os == 'windows' && inputs.step == 'check' && inputs.clang_format == true
       shell: pwsh
       run: cmake --build ./build --config Release --target clang_format_test
-    - if: runner.os != 'windows' && inputs.step == 'check' && inputs.clang_format
+    - if: runner.os != 'windows' && inputs.step == 'check' && inputs.clang_format == true
       shell: bash
       run: cmake --build ./build --config Release --target clang_format_test
 
     # ShellCheck
-    - if: runner.os == 'windows' && inputs.step == 'check' && inputs.shellcheck
+    - if: runner.os == 'windows' && inputs.step == 'check' && inputs.shellcheck == true
       shell: pwsh
       run: cmake --build ./build --config Release --target shellcheck
-    - if: runner.os != 'windows' && inputs.step == 'check' && inputs.shellcheck
+    - if: runner.os != 'windows' && inputs.step == 'check' && inputs.shellcheck == true
       shell: bash
       run: cmake --build ./build --config Release --target shellcheck
 

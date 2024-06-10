@@ -133,6 +133,23 @@ runs:
         CC: gcc
         CXX: g++
 
+    - if: runner.os == 'windows' && inputs.step == 'configure' && inputs.mode == 'static' && inputs.compiler == ''
+      shell: pwsh
+      run: >
+        cmake -S . -B ./build
+        -DCMAKE_BUILD_TYPE:STRING=Release
+        -DBUILD_SHARED_LIBS:BOOL=OFF
+        -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
+        ${{ inputs.options }}
+    - if: runner.os != 'windows' && inputs.step == 'configure' && inputs.mode == 'static' && inputs.compiler == ''
+      shell: bash
+      run: >
+        cmake -S . -B ./build
+        -DCMAKE_BUILD_TYPE:STRING=Release
+        -DBUILD_SHARED_LIBS:BOOL=OFF
+        -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
+        ${{ inputs.options }}
+
     #############################################
     # Build
     #############################################

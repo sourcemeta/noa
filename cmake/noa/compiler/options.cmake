@@ -44,6 +44,9 @@ function(noa_add_default_options visibility target)
       -fstrict-aliasing
       -ftree-vectorize
 
+      # To improve how much GCC/Clang will vectorize
+      -fno-math-errno
+
       # Assume that signed arithmetic overflow of addition, subtraction and
       # multiplication wraps around using twos-complement representation
       # See https://users.cs.utah.edu/~regehr/papers/overflow12.pdf
@@ -79,13 +82,9 @@ function(noa_add_default_options visibility target)
       -fslp-vectorize)
   elseif(NOA_COMPILER_GCC)
     target_compile_options("${target}" ${visibility}
-      # To improve how much GCC will vectorize
-      -fno-math-errno
       -fno-trapping-math
-
       # Newer versions of GCC (i.e. 14) seem to print a lot of false-positives here
       -Wno-dangling-reference
-
       # Disables runtime type information
       -fno-rtti)
   endif()

@@ -256,6 +256,21 @@ For example:
 noa_add_default_options(PUBLIC my_lib)
 ````
 
+#### `noa_add_vectorization_diagnostics`
+
+If possible, configure the given compiler to emit loop vectorization
+diagnostics during compilation.
+
+```cmake
+noa_add_vectorization_diagnostics([target])
+```
+
+For example:
+
+```cmake
+noa_add_vectorization_diagnostics(my_lib)
+````
+
 #### `noa_sanitizer`
 
 Provides a unified interface for setting up a set of compiler sanitizers

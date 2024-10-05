@@ -94,13 +94,14 @@ endfunction()
 # - On Clang , seems to only take effect on release shared builds
 # - On GCC, seems to only take effect on release shared builds
 function(noa_add_vectorization_diagnostics target)
-  # See https://llvm.org/docs/Vectorizers.html#id6
   if(NOA_COMPILER_LLVM)
+    # See https://llvm.org/docs/Vectorizers.html#id6
     target_compile_options("${target}" PRIVATE
       -Rpass-analysis=loop-vectorize
       -Rpass-missed=loop-vectorize)
   elseif(NOA_COMPILER_GCC)
     target_compile_options("${target}" PRIVATE
-      -fopt-info-vec-missed)
+      -fopt-info-vec-missed
+      -fopt-info-loop-missed)
   endif()
 endfunction()

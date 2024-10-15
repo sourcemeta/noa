@@ -47,6 +47,7 @@ noa_library(
   [NAMESPACE [namespace]]
   PROJECT [project]
   NAME [name]
+  VARIANT [variant]
   FOLDER [folder]
   [PRIVATE_HEADERS [headers...]]
   [SOURCES [globs...]])
@@ -61,7 +62,7 @@ If `NAMESPACE` is declared, the expected structure is as follows:
 ```
 include/
   <namespace>/
-    <name>/
+    <project>/
       <name>.h
       <name>_<private_header>.h
 <sources...>.cc
@@ -72,11 +73,26 @@ If `NAMESPACE` is not declared, the expected structure is as follows:
 
 ```
 include/
-  <name>/
+  <project>/
     <name>.h
     <name>_<private_header>.h
 <sources...>.cc
 <sources...>.h
+```
+
+If `VARIANT` is declared, it allows for creating sub-libraries or variants
+of a main library. The expected structure changes as follows:
+
+```
+<name>/
+  include/
+    <namespace>/
+      <project>/
+        <name>.h
+        <name>_<private_header>.h
+  <variant>/
+    <sources...>.cc
+    <sources...>.h
 ```
 
 If `NAMESPACE` is declared, calling this function will result in the following:
@@ -90,7 +106,7 @@ following:
 - A target called `<project>_<name>`
 - An alias target called `<project>::<name>`
 
-In both cases:
+In all cases:
 
 - An export file on the include path called `<name>_export.h`, if the library
   is not header-only

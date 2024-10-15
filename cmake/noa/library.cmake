@@ -60,25 +60,25 @@ function(noa_library)
   add_library(${ALIAS_NAME} ALIAS ${TARGET_NAME})
 
   if(NOT NOA_LIBRARY_VARIANT)
-    set(includeDir "${CMAKE_CURRENT_SOURCE_DIR}/include")
+    set(include_dir "${CMAKE_CURRENT_SOURCE_DIR}/include")
   else()
-    set(includeDir "${CMAKE_CURRENT_SOURCE_DIR}/../include")
+    set(include_dir "${CMAKE_CURRENT_SOURCE_DIR}/../include")
   endif()
   if(NOA_LIBRARY_SOURCES)
     target_include_directories(${TARGET_NAME} PUBLIC
-      "$<BUILD_INTERFACE:${includeDir}>"
+      "$<BUILD_INTERFACE:${include_dir}>"
       "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
   else()
     target_include_directories(${TARGET_NAME} INTERFACE
-      "$<BUILD_INTERFACE:${includeDir}>"
+      "$<BUILD_INTERFACE:${include_dir}>"
       "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
   endif()
 
   if(NOA_LIBRARY_SOURCES)
     if(NOA_LIBRARY_VARIANT)
-      set(exportName "${NOA_LIBRARY_PROJECT}::${NOA_LIBRARY_NAME}::${NOA_LIBRARY_VARIANT}")
+      set(export_name "${NOA_LIBRARY_PROJECT}::${NOA_LIBRARY_NAME}::${NOA_LIBRARY_VARIANT}")
     else()
-      set(exportName "${NOA_LIBRARY_PROJECT}::${NOA_LIBRARY_NAME}")
+      set(export_name "${NOA_LIBRARY_PROJECT}::${NOA_LIBRARY_NAME}")
     endif()
 
     set_target_properties(${TARGET_NAME}
@@ -86,7 +86,7 @@ function(noa_library)
         OUTPUT_NAME ${TARGET_NAME}
         PUBLIC_HEADER "${PUBLIC_HEADER}"
         PRIVATE_HEADER "${ABSOLUTE_PRIVATE_HEADERS}"
-        EXPORT_NAME "${exportName}"
+        EXPORT_NAME "${export_name}"
         FOLDER "${NOA_LIBRARY_FOLDER}")
   else()
     set_target_properties(${TARGET_NAME}

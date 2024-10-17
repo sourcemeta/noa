@@ -108,8 +108,8 @@ following:
 
 In all cases:
 
-- An export file on the include path called `<name>_export.h`, if the library
-  is not header-only
+- An export file on the library include path called `<name>_export.h`, if the
+  library is not header-only
 - The version of the library corresponds to the project version, if the library
   is not header-only
 

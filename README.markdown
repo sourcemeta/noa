@@ -25,7 +25,7 @@ using `vendorpull`), add the following statements *after* the first call to
 [`project`](https://cmake.org/cmake/help/latest/command/project.html):
 
 ```cmake
-include(vendor/noa/cmake/noa.cmake)
+add_subdirectory(vendor/noa)
 ```
 
 ### Defaults
@@ -37,6 +37,28 @@ list of applied defaults
 including Noa.**
 
 ### Functions
+
+#### `noa_executable`
+
+Instantiate a C++ executable with an opinionated target name and default options.
+
+```cmake
+noa_library(
+  [NAMESPACE [namespace]]
+  PROJECT [project]
+  NAME [name]
+  VARIANT [variant]
+  FOLDER [folder]
+  SOURCES [globs...]
+  [OUTPUT [output-variable]])
+```
+
+Calling this function will result in the following:
+
+- A target called `[<namespace>_]<project>_<name>`
+
+If `OUTPUT` is declared, such variable will contain the target name created by
+this function.
 
 #### `noa_library`
 
@@ -313,6 +335,24 @@ For example:
 ```cmake
 noa_sanitizer(NAME address)
 ```
+
+#### `noa_googletest`
+
+Instantiate a C++ executable that links with GoogleTest.
+
+```cmake
+noa_googletest(
+  [NAMESPACE [namespace]]
+  PROJECT [project]
+  NAME [name]
+  VARIANT [variant]
+  FOLDER [folder]
+  SOURCES [globs...])
+```
+
+Calling this function will result in the following:
+
+- A target called `[<namespace>_]<project>_<name>_unit`
 
 #### Tips & Tricks
 

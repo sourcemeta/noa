@@ -1,2 +1,6 @@
 .editorconfig
 README.markdown
+Brewfile
+DEPENDENCIES
+Makefile
+vendor/googletest.mask

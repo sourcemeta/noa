@@ -354,6 +354,22 @@ Calling this function will result in the following:
 
 - A target called `[<namespace>_]<project>_<name>_unit`
 
+#### `noa_googlebenchmark`
+
+Instantiate a C++ executable that links with GoogleBenchmark.
+
+```cmake
+noa_googlebenchmark(
+  [NAMESPACE [namespace]]
+  PROJECT [project]
+  FOLDER [folder]
+  SOURCES [globs...])
+```
+
+Calling this function will result in the following:
+
+- A target called `[<namespace>_]<project>_benchmark`
+
 #### Tips & Tricks
 
 - To better debug issues raised by the `undefined` sanitizer on LLVM, run with

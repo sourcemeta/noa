@@ -1,5 +1,6 @@
 #include <sourcemeta/noa/flat_map.h>
 #include <sourcemeta/noa/hash.h>
+#include <sourcemeta/noa/regex.h>
 
 #include <cstdlib>  // EXIT_SUCCESS
 #include <iostream> // std::cout

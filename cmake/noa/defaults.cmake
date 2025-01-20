@@ -65,9 +65,9 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # See https://github.com/google/googletest/blob/e47544ad31cb3ceecd04cc13e8fe556f8df9fe0b/googletest/cmake/internal_utils.cmake#L173-L174
 if(WIN32)
   # For EXE files
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE STRING "" PARENT_SCOPE)
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE STRING "")
   # For DLL files
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE STRING "" PARENT_SCOPE)
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE STRING "")
 endif()
 
 # Enable IPO/LTO to help the compiler optimize across modules.

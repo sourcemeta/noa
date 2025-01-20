@@ -4,3 +4,4 @@ Brewfile
 DEPENDENCIES
 Makefile
 vendor/googletest.mask
+test

@@ -1,5 +1,3 @@
-include(noa)
-
 noa_googletest(NAMESPACE sourcemeta PROJECT noa NAME flat_map
   FOLDER "Noa/Flat Map"
   SOURCES flat_map_test.cc)

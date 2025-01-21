@@ -1,5 +1,3 @@
-include(noa)
-
 noa_googletest(NAMESPACE sourcemeta PROJECT noa NAME regex
   FOLDER "Noa/Regex"
   SOURCES regex_matches_test.cc regex_to_regex_test.cc)

@@ -22,6 +22,8 @@ recommend always following the latest commit in the `main` branch.
 CMake
 -----
 
+To load the CMake utilities, include `cmake/noa.cmake` as part of your project.
+
 ### Defaults
 
 Noa will automatically set sane defaults for your project. You can check the

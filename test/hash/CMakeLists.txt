@@ -1,5 +1,3 @@
-include(noa)
-
 noa_googletest(NAMESPACE sourcemeta PROJECT noa NAME hash
   FOLDER "Noa/Hash"
   SOURCES hash_test.cc)

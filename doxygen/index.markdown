@@ -3,7 +3,7 @@ Getting Started
 
 @tableofcontents
 
-A set of re-usable and opinionated utilities for
+A set of re-usable and opinionated CMake and C++ utilities for
 [Sourcemeta](https://www.sourcemeta.com) projects.
 
 Installation
@@ -21,16 +21,6 @@ recommend always following the latest commit in the `main` branch.
 
 CMake
 -----
-
-To make use of Noa in a CMake project (after installing it into your project
-using `vendorpull`), add the following statements *after* the first call to
-[`project`](https://cmake.org/cmake/help/latest/command/project.html):
-
-```cmake
-add_subdirectory(vendor/noa)
-```
-
-Noa includes various CMake and C++ foundational utilities.
 
 ### Defaults
 

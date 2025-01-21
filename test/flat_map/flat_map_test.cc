@@ -291,3 +291,13 @@ TEST(Noa_FlatMap, contains) {
   EXPECT_TRUE(map.contains("1", hash_2));
   EXPECT_TRUE(map.contains("2", hash_3));
 }
+
+TEST(Noa_FlatMap, try_at) {
+  sourcemeta::noa::FlatMap<std::string, bool,
+                           sourcemeta::noa::StandardHash<std::string>>
+      map;
+
+  const auto hash{map.assign("0", true)};
+  EXPECT_TRUE(*map.try_at("0", hash));
+  EXPECT_EQ(map.try_at("1", map.hash("1")), nullptr);
+}

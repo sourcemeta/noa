@@ -4,4 +4,8 @@ Brewfile
 DEPENDENCIES
 Makefile
 vendor/googletest.mask
+vendor/googlebenchmark.mask
+vendor/boost-regex.mask
 test
+doxygen
+benchmark

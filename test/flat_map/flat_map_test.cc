@@ -301,3 +301,23 @@ TEST(Noa_FlatMap, try_at) {
   EXPECT_TRUE(*map.try_at("0", hash));
   EXPECT_EQ(map.try_at("1", map.hash("1")), nullptr);
 }
+
+TEST(Noa_FlatMap, at_index) {
+  sourcemeta::noa::FlatMap<std::string, bool,
+                           sourcemeta::noa::StandardHash<std::string>>
+      map;
+
+  const auto hash_1{map.assign("0", true)};
+  const auto hash_2{map.assign("1", false)};
+
+  const auto &entry_1{map.at(0)};
+  const auto &entry_2{map.at(1)};
+
+  EXPECT_EQ(entry_1.first, "0");
+  EXPECT_TRUE(entry_1.second);
+  EXPECT_EQ(entry_1.hash, hash_1);
+
+  EXPECT_EQ(entry_2.first, "1");
+  EXPECT_FALSE(entry_2.second);
+  EXPECT_EQ(entry_2.hash, hash_2);
+}

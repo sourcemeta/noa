@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1737652019137,
+  "lastUpdate": 1737658977790,
   "repoUrl": "https://github.com/sourcemeta/noa",
   "entries": {
     "Benchmark (macos/llvm)": [
@@ -1364,6 +1364,118 @@ window.BENCHMARK_DATA = {
             "value": 820.4259600058755,
             "unit": "ns/iter",
             "extra": "iterations: 876479\ncpu: 803.2320226725333 ns\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Juan Cruz Viotti",
+            "username": "jviotti",
+            "email": "jv@jviotti.com"
+          },
+          "committer": {
+            "name": "GitHub",
+            "username": "web-flow",
+            "email": "noreply@github.com"
+          },
+          "id": "1827a68799cfef6f1b9bf967f66d21dd42a84f96",
+          "message": "Attempt to enable SIMD if possible (#28)\n\nSigned-off-by: Juan Cruz Viotti <jv@jviotti.com>",
+          "timestamp": "2025-01-23T17:05:21Z",
+          "url": "https://github.com/sourcemeta/noa/commit/1827a68799cfef6f1b9bf967f66d21dd42a84f96"
+        },
+        "date": 1737658976078,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "Regex_Lower_S_Or_Upper_S_Asterisk",
+            "value": 1.6820928349963942,
+            "unit": "ns/iter",
+            "extra": "iterations: 416099483\ncpu: 1.6818550096588325 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Caret_Lower_S_Or_Upper_S_Asterisk_Dollar",
+            "value": 1.6841538556789666,
+            "unit": "ns/iter",
+            "extra": "iterations: 416996789\ncpu: 1.6829554052033708 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Period_Asterisk",
+            "value": 1.6814032703079635,
+            "unit": "ns/iter",
+            "extra": "iterations: 415018943\ncpu: 1.6807666535838104 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Group_Period_Asterisk_Group",
+            "value": 1.686648928007517,
+            "unit": "ns/iter",
+            "extra": "iterations: 416748528\ncpu: 1.6860143534808103 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Period_Plus",
+            "value": 2.0955225869682144,
+            "unit": "ns/iter",
+            "extra": "iterations: 346457472\ncpu: 2.0611130014826182 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Period",
+            "value": 2.372724226203843,
+            "unit": "ns/iter",
+            "extra": "iterations: 309533180\ncpu: 2.237944248820111 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Caret_Period_Plus_Dollar",
+            "value": 2.2704014096279033,
+            "unit": "ns/iter",
+            "extra": "iterations: 340480174\ncpu: 2.1796100233430944 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Caret_Group_Period_Plus_Group_Dollar",
+            "value": 2.2705007399860495,
+            "unit": "ns/iter",
+            "extra": "iterations: 329807534\ncpu: 2.169480458260244 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Caret_Period_Asterisk_Dollar",
+            "value": 1.8234157881316468,
+            "unit": "ns/iter",
+            "extra": "iterations: 406839554\ncpu: 1.7686357998514592 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Caret_Group_Period_Asterisk_Group_Dollar",
+            "value": 1.7834759081846323,
+            "unit": "ns/iter",
+            "extra": "iterations: 411283263\ncpu: 1.7514303761006667 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Caret_X_Hyphen",
+            "value": 7.664126007106659,
+            "unit": "ns/iter",
+            "extra": "iterations: 99313319\ncpu: 7.568078557519584 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Period_Md_Dollar",
+            "value": 83.70844307358703,
+            "unit": "ns/iter",
+            "extra": "iterations: 8074749\ncpu: 81.36129061101461 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Caret_Slash_Period_Asterisk",
+            "value": 6.36774776376604,
+            "unit": "ns/iter",
+            "extra": "iterations: 109291324\ncpu: 6.1501130684444725 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Caret_Period_Range_Dollar",
+            "value": 2.562488044850213,
+            "unit": "ns/iter",
+            "extra": "iterations: 279309547\ncpu: 2.5602383007695706 ns\nthreads: 1"
+          },
+          {
+            "name": "Regex_Nested_Backtrack",
+            "value": 815.5803431345256,
+            "unit": "ns/iter",
+            "extra": "iterations: 847714\ncpu: 814.9812318777318 ns\nthreads: 1"
           }
         ]
       }

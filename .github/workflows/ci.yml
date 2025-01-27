@@ -97,7 +97,6 @@ jobs:
           cmake -Wno-dev -S . -B ./build
           -DCMAKE_BUILD_TYPE:STRING=Release
           -DBUILD_SHARED_LIBS:BOOL=OFF
-          -DNOA_DOCS:BOOL=OFF
           -DNOA_TESTS:BOOL=ON
           -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
           ${{ matrix.platform.options }}
@@ -107,7 +106,6 @@ jobs:
           cmake -Wno-dev -S . -B ./build
           -DCMAKE_BUILD_TYPE:STRING=Release
           -DBUILD_SHARED_LIBS:BOOL=ON
-          -DNOA_DOCS:BOOL=OFF
           -DNOA_TESTS:BOOL=ON
           -DCMAKE_COMPILE_WARNING_AS_ERROR:BOOL=ON
           ${{ matrix.platform.options }}

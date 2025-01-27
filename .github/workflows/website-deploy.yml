@@ -28,7 +28,6 @@ jobs:
           -DCMAKE_BUILD_TYPE:STRING=Release
           -DNOA_HASH:BOOL=OFF
           -DNOA_FLAT_MAP:BOOL=OFF
-          -DNOA_REGEX:BOOL=OFF
           -DNOA_GOOGLETEST:BOOL=OFF
           -DNOA_GOOGLEBENCHMARK:BOOL=OFF
           -DNOA_DOCS:BOOL=ON

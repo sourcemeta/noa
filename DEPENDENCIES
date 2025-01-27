@@ -1,4 +1,3 @@
 vendorpull https://github.com/sourcemeta/vendorpull dea311b5bfb53b6926a4140267959ae334d3ecf4
 googletest https://github.com/google/googletest a7f443b80b105f940225332ed3c31f2790092f47
 googlebenchmark https://github.com/google/benchmark 378fe693a1ef51500db21b11ff05a8018c5f0e55
-boost-regex https://github.com/boostorg/regex boost-1.86.0
